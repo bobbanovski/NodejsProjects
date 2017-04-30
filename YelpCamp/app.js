@@ -1,7 +1,9 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
+var express = require("express"),
+    app = express(),
+    bodyParser = require("body-parser"),
+    mongoose = require("mongoose");
+
+var Campsite = require("./models/campsite");
 
 mongoose.connect("mongodb://localhost/campsites");
 app.use(bodyParser.urlencoded({extended: true}));
