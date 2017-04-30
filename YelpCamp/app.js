@@ -73,11 +73,6 @@ app.post("/campgrounds", function(req, res) {
     res.redirect("/campgrounds");
 });
 
-app.listen(process.env.PORT || '80', process.env.IP, function() {
-    console.log("YelpCamp started");
-});
-
-
 app.post("/register", function(req, res){
     var newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, function(err,user){
@@ -100,3 +95,20 @@ app.post("/login", passport.authenticate("local",
     }), function(req, res) {
     
 })
+
+app.get("/logout", function(req, res){
+    req.logOut();
+    res.redirect("/campgrounds");
+});
+
+//create islogged in middleware
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
+
+app.listen(process.env.PORT || '80', process.env.IP, function() {
+    console.log("YelpCamp started");
+});
