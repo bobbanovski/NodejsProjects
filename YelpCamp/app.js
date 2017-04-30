@@ -4,28 +4,46 @@ var express = require("express"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
     mongoose = require("mongoose");
+mongoose.Promise = require('bluebird'); //required for Passport-mongoose
 
+//include models
 var Campsite = require("./models/campsite");
 var User = require("./models/user");
 
 mongoose.connect("mongodb://localhost/campsites");
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
-//Set up schema
-
-
-//temp array of campgrounds
-    // var campgrounds = [
-    //     {name: "billabong shoal", image:"http://lorempixel.com/400/200/"},
-    //     {name: "Granite Hill", image:"http://lorempixel.com/400/200/"},
-    //     {name: "Dingo Beach", image:"http://lorempixel.com/400/200/"}
-    // ]
+//Configure PASSPORT
+app.use(require("express-session")({
+    secret: "dfu8udso323jndj2oih23",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+//use passport-local-mongoose in user.js
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.get("/", function(req, res){
     // res.send("New Landing Page");
     res.render("landing");
 });
+
+// ----------------------
+// AUTH ROUTES
+app.get("/register", function(req,res){
+    res.render("register");
+});
+
+app.get("/login", function(req,res){
+    res.render("login");
+});
+
+//-----------------------
 
 app.get("/campgrounds", function(req, res){    
     //res.render("campgrounds", {campgrounds:campgrounds});
@@ -58,3 +76,27 @@ app.post("/campgrounds", function(req, res) {
 app.listen(process.env.PORT || '80', process.env.IP, function() {
     console.log("YelpCamp started");
 });
+
+
+app.post("/register", function(req, res){
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err,user){
+        if(err){
+            console.error("something went wrong");
+            return res.render("register");
+        } 
+        passport.authenticate("local")(req, res, function(){
+            console.log(newUser);
+            res.redirect("/campgrounds");
+        });        
+    });
+});
+
+//app.post(/login, middleware, callback)
+app.post("/login", passport.authenticate("local", 
+    {
+        successRedirect: "/campgrounds",
+        failureRedirect: "/login"
+    }), function(req, res) {
+    
+})
