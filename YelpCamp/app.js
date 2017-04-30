@@ -1,9 +1,12 @@
 var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
+    passport = require("passport"),
+    LocalStrategy = require("passport-local"),
     mongoose = require("mongoose");
 
 var Campsite = require("./models/campsite");
+var User = require("./models/user");
 
 mongoose.connect("mongodb://localhost/campsites");
 app.use(bodyParser.urlencoded({extended: true}));
