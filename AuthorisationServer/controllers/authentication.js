@@ -1,10 +1,16 @@
-// var bodyparser = require("body-parser");
+const jwt = require("jwt-simple");
+const config = require("../config");
+
 var User = require("../models/user");
+function createTokenForUser(user){
+    var timestamp = new Date().getTime();
+    return jwt.encode({ sub: user._id, iat:timestamp }, config.secret) //sub -subject of token
+}
 
 exports.signup = function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    
+
     if (!username || !password){
         return res.status(422).send({error: "Missing username or password"});
     }
@@ -20,7 +26,8 @@ exports.signup = function(req, res, next) {
         });
         user.save(function(err){
             if (err) {return next(err);}
-            res.json({"Success": true});
+            //return JWT
+            res.json({ token: createTokenForUser(user)});
         });
     });
     // User.create(new User({
