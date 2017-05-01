@@ -1,5 +1,6 @@
 var mongoose = require("mongoose"),
-    bcrypt = require("bcrypt-nodejs");
+    bcrypt = require("bcrypt-nodejs"),
+    autoIncrement = require("mongoose-auto-increment");
 mongoose.Promise = require('bluebird');
 
 var userSchema = new mongoose.Schema({
@@ -24,6 +25,6 @@ userSchema.methods.comparePasswords = function(inputPassword, callback) {
         callback(null, isMatch);
     });
 }
-
+userSchema.plugin(autoIncrement.plugin, 'User');
 var userModel = mongoose.model("user", userSchema);
 module.exports = userModel;

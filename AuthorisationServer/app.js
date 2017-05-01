@@ -2,10 +2,12 @@ var express = require("express"),
     mongoose = require("mongoose"),
     http = require("http"),
     bodyParser = require("body-parser"),
+    autoIncrement = require("mongoose-auto-increment");
     morgan = require("morgan"); //logging framework
 
 var app = express();
-mongoose.connect("mongodb://localhost/authorise"); //connect to database
+var dbConnection = mongoose.connect("mongodb://localhost/nodebb"); //connect to database
+autoIncrement.initialize(dbConnection);
 //App setup
 var router = require("./routes/router")
 

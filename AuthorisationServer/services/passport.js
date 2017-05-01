@@ -19,7 +19,6 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
             return done(null, user); // adds user to req.user
         })
     });
-    //if correct, issue token
 });
 
 //=============== JWT STRATEGY ===================================
