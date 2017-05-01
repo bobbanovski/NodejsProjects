@@ -3,10 +3,11 @@ var express = require("express"),
     http = require("http"),
     bodyparser = require("body-parser"),
     morgan = require("morgan"); //logging framework
+var router = require("./routes/authRoutes")
 
 var app = express();
 //App setup
-
+router(app);
 //Middleware
 app.use(morgan("combined"));
 app.use(bodyparser.json({type: '*/*'}));
