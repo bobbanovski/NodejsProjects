@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Campsite = require("../models/campsite");
 
-router.get("/campgrounds", function(req, res){    
+router.get("/", function(req, res){    
     //res.render("campgrounds", {campgrounds:campgrounds});
     //get all campgrounds from db
     Campsite.find({}, function(err, allCampsites){
@@ -14,7 +14,7 @@ router.get("/campgrounds", function(req, res){
     })
 });
 
-router.post("/campgrounds", function(req, res) {
+router.post("/", function(req, res) {
     var name = req.body.name;
     var image = req.body.image;
     var costPerNight = req.body.costPerNight;
@@ -27,7 +27,7 @@ router.post("/campgrounds", function(req, res) {
             res.redirect("/campgrounds");
         }
     });
-    res.redirect("/campgrounds");
+    res.redirect("/");
 });
 
 function isLoggedIn(req, res, next){

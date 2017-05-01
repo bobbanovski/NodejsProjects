@@ -37,81 +37,8 @@ app.use(function(req, res, next) {
     next();
 });
 //use route files
-app.use(authRoutes);
-app.use(campsiteRoutes);
-
-// app.get("/", function(req, res){
-//     // res.send("New Landing Page");
-//     res.render("landing");
-// });
-
-// // ----------------------
-// // AUTH ROUTES
-// app.get("/register", function(req,res){
-//     res.render("register");
-// });
-
-// app.get("/login", function(req,res){
-//     res.render("login");
-// });
-
-//-----------------------
-
-// app.get("/campgrounds", function(req, res){    
-//     //res.render("campgrounds", {campgrounds:campgrounds});
-//     //get all campgrounds from db
-//     Campsite.find({}, function(err, allCampsites){
-//         if (err){
-//             console.log(err);
-//         } else {
-//             res.render("campgrounds", {campgrounds:allCampsites}); //send to ejs file
-//         }
-//     })
-// });
-
-// app.post("/campgrounds", function(req, res) {
-//     var name = req.body.name;
-//     var image = req.body.image;
-//     var costPerNight = req.body.costPerNight;
-//     var newCampground = {name: name, image: image, costPerNight: costPerNight}
-//     //create and save to database
-//     Campsite.create(newCampground, function(err, done){
-//         if(err){
-//             console.log("error found");
-//         } else {
-//             res.redirect("/campgrounds");
-//         }
-//     });
-//     res.redirect("/campgrounds");
-// });
-
-// app.post("/register", function(req, res){
-//     var newUser = new User({username: req.body.username});
-//     User.register(newUser, req.body.password, function(err,user){
-//         if(err){
-//             console.error("something went wrong");
-//             return res.render("register");
-//         } 
-//         passport.authenticate("local")(req, res, function(){
-//             console.log(newUser);
-//             res.redirect("/campgrounds");
-//         });        
-//     });
-// });
-
-// //app.post(/login, middleware, callback)
-// app.post("/login", passport.authenticate("local", 
-//     {
-//         successRedirect: "/campgrounds",
-//         failureRedirect: "/login"
-//     }), function(req, res) {
-    
-// })
-
-// app.get("/logout", function(req, res){
-//     req.logOut();
-//     res.redirect("/campgrounds");
-// });
+app.use("/", authRoutes);
+app.use("/campgrounds", campsiteRoutes);
 
 //create islogged in middleware
 // function isLoggedIn(req, res, next){
