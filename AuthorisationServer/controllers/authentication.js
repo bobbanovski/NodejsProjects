@@ -30,16 +30,10 @@ exports.signup = function(req, res, next) {
             res.json({ token: createTokenForUser(user)});
         });
     });
-    // User.create(new User({
-    //     username: username,
-    //     password: password
-    // }));
 }
-    //check if user exists, return error if so   
 
-    //     //if no user create username and password.
-    
-    
-    //     //Respond to request
-    // });
+exports.signin = function(req,res,next) {
+    //after authorisation, give jwt token
+    res.send({ token: createTokenForUser(req.user)});
+}
 

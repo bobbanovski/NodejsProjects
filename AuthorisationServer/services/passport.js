@@ -15,8 +15,8 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
         //compare passwords
         user.comparePasswords(password, function(err, isMatched){
             if(err) {return done(err);}
-            if(!isMatch) { return(null, false);}
-            return done(null, user);
+            if(!isMatched) { return(null, false);}
+            return done(null, user); // adds user to req.user
         })
     });
     //if correct, issue token
