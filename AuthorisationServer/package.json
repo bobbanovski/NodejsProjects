@@ -1,0 +1,19 @@
+{
+  "name": "authorisationserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "author": "rb",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.7",
+    "morgan": "^1.8.1",
+    "nodemon": "^1.11.0"
+  }
+}
