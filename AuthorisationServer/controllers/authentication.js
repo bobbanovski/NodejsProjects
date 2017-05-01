@@ -4,7 +4,11 @@ var User = require("../models/user");
 exports.signup = function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    console.log(req.body);
+    
+    if (!username || !password){
+        return res.status(422).send({error: "Missing username or password"});
+    }
+
     User.findOne({ username: username}, function(err, existingUser) {
         if(err){ return next(err);}
         if (existingUser){
