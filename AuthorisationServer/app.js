@@ -1,20 +1,22 @@
 var express = require("express"),
     mongoose = require("mongoose"),
     http = require("http"),
-    bodyparser = require("body-parser"),
+    bodyParser = require("body-parser"),
     morgan = require("morgan"); //logging framework
-var router = require("./routes/authRoutes")
 
 var app = express();
+mongoose.connect("mongodb://localhost/authorise"); //connect to database
 //App setup
-router(app);
+var router = require("./routes/router")
+
 //Middleware
 app.use(morgan("combined"));
-app.use(bodyparser.json({type: '*/*'}));
+app.use(bodyParser.json({ type: '*/*' }));
 
+router(app); //put this after the middleware
 
 //Server setup
 var port = process.env.PORT || 80;
 var server = http.createServer(app);
 server.listen(port);
-console.log("server listening on: ", port);
+console.log("server listening on port: ", port);
