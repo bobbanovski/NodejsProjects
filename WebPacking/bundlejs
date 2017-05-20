@@ -1,0 +1,17 @@
+//bundle.js creates an array of functions, with index.js as the
+//1st element in the array, thus the entry point
+//webpack uses simple js arrays
+var muhModules = [
+    function() {
+        const summation = (a,b) => a + b;
+        return summation;
+    },
+    function() { //this is the index.js
+        const summation = muhModules[0](); //go into above function, retrieve the output
+        const total = sum(10,10);
+        console.log(total);
+    }
+];
+
+var entryPointIndex = 1;
+muhModules[entryPointIndex](); //execute the first function in array

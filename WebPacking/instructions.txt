@@ -3,5 +3,8 @@ make npm project
 Create 2 JS modules
 
 Install/config webpack
-
+    npm install --save-dev webpack@2.2.0-rc.0
+    create webpack.config.js in root dir
+    Add "build": "webpack" to "Scripts" under package.json
 Run webpack
+    npm run build
