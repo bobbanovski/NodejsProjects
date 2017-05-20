@@ -1,0 +1,7 @@
+make npm project
+
+Create 2 JS modules
+
+Install/config webpack
+
+Run webpack

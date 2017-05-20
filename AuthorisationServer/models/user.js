@@ -5,7 +5,8 @@ mongoose.Promise = require('bluebird');
 
 var userSchema = new mongoose.Schema({
     username: {type:String, unique:true, lowercase:true}, //makes username unique
-    password: String
+    password: String,
+    id: {type: Number, unique:true}
 });
 userSchema.pre('save', function(next) {
     var user = this; //this instance of user model

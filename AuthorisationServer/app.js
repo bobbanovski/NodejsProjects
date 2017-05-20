@@ -6,7 +6,7 @@ var express = require("express"),
     morgan = require("morgan"); //logging framework
 
 var app = express();
-var dbConnection = mongoose.connect("mongodb://localhost/nodebb"); //connect to database
+var dbConnection = mongoose.connect("mongodb://localhost/admin"); //connect to database
 autoIncrement.initialize(dbConnection);
 //App setup
 var router = require("./routes/router")
