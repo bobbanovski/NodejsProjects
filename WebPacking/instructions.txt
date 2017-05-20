@@ -1,5 +1,5 @@
 make npm project
-
+    create src folder
 Create 2 JS modules
 
 Install/config webpack
